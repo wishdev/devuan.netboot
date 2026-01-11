@@ -13,8 +13,12 @@ goto ${custom_choice}
 goto custom_exit
 
 :option_one
+imgfree
 kernel https://pkgmaster.devuan.org/devuan/dists/excalibur/main/installer-arm64/current/images/netboot/debian-installer/arm64/linux
 initrd https://pkgmaster.devuan.org/devuan/dists/excalibur/main/installer-arm64/current/images/netboot/debian-installer/arm64/initrd.gz
+echo
+echo MD5sums:
+md5sum linux initrd.gz
 boot || goto custom_exit
 
 :custom_exit
