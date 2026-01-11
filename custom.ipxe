@@ -1,12 +1,22 @@
 #!ipxe
 ###
-### netboot.xyz-custom menu
+### netboot.xyz-custom menu example
 ###
 
-:start
-echo Hello world!
-sleep 10
+:custom
+clear custom_choice
+menu This devuan netboot
+item option_one arm64
+choose custom_choice || goto custom_exit
+echo ${cls}
+goto ${custom_choice}
 goto custom_exit
 
+:option_one
+kernel https://pkgmaster.devuan.org/devuan/dists/excalibur/main/installer-arm64/current/images/netboot/debian-installer/arm64/linux
+initrd https://pkgmaster.devuan.org/devuan/dists/excalibur/main/installer-arm64/current/images/netboot/debian-installer/arm64/initrd.gz
+boot || goto custom_exit
+
 :custom_exit
-exit 0
+chain utils.ipxe
+exit
